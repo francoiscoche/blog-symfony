@@ -5,7 +5,8 @@ Blog app with Symfony and Docker. Made to learn.
 
 *Developpement in progress ...*
 
-- Using [slugify](https://github.com/cocur/slugify) to generate post slugs.
+- Using [Slugify](https://github.com/cocur/slugify) to generate post slugs.
+- Using [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle) for images uploading
 
 
 

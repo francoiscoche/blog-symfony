@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Post;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PostRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[UniqueEntity('slug', message: 'This slug already exist.')]
 class Post
 {
 
@@ -36,6 +38,9 @@ class Post
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Thumbnail $thumbnail = null;
 
     public function __construct()
     {
@@ -132,5 +137,17 @@ class Post
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getThumbnail(): ?Thumbnail
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?Thumbnail $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
     }
 }
