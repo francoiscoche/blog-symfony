@@ -26,8 +26,7 @@ Blog app with Symfony and Docker. Made to learn.
 
 ### UML
 
-<img width="300" alt="image" src="https://user-images.githubusercontent.com/102531037/199531347-72f3cae7-ccbf-4ed9-9314-f77328479949.png">
-
+<img width="500" alt="uml" src="https://user-images.githubusercontent.com/102531037/199607904-e6f927d8-6f70-41c3-86ee-260807757ee3.png">
 
 
 ### Author
