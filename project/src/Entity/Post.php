@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\PostRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PostRepository;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -42,6 +43,10 @@ class Post
         $this->createdAt = new \DateTimeImmutable();
     }
 
+    public function prePersist()
+    {
+        $this->slug = (new Slugify())->slugify($this->title);
+    }
     public function preUpdate()
     {
         $this->updatedAt = new \DateTimeImmutable();

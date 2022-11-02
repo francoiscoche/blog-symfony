@@ -5,7 +5,7 @@ Blog app with Symfony and Docker. Made to learn.
 
 *Developpement in progress ...*
 
-
+- Using [slugify](https://github.com/cocur/slugify) to generate post slugs.
 
 
 
@@ -14,7 +14,7 @@ Blog app with Symfony and Docker. Made to learn.
 - Docker
 - Docker-compose
 
-### Installation 
+### Installation
 
 ```bash
   docker-compose build
