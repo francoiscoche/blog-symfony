@@ -5,13 +5,12 @@ Blog app with Symfony and Docker. Made to learn.
 
 *Developpement in progress ...*
 
-- Using [Slugify](https://github.com/cocur/slugify) to generate post slugs.
-- Using [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle) for images uploading.
-- Using [DoctrineFixturesBundle](https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html) and [FakePHP](https://fakerphp.github.io/) for generating false test data.
+- Integration of [Slugify](https://github.com/cocur/slugify) to generate post slugs.
+- Integration of [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle) for images uploading.
+- Integration of [DoctrineFixturesBundle](https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html) and [FakePHP](https://fakerphp.github.io/) for generating false test data.
 - Integration of TailWindCss with WebPackEncore from this [tutorial](https://www.yourigalescot.com/fr/blog/comment-integrer-tailwindcss-v3-a-un-projet-symfony-avec-webpack-encore).
 - Integration of [TailWindElement](https://tailwind-elements.com/quick-start/) (Bootstrap components recreated with tailwind css).
-).
-
+- Integration of [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) to use a pagination system.
 
 
 ### Requirements
