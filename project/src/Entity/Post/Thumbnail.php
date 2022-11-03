@@ -4,7 +4,7 @@ namespace App\Entity\Post;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use App\Repository\ThumbnailRepository;
+use App\Repository\Post\ThumbnailRepository;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ThumbnailRepository::class)]
