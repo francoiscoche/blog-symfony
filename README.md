@@ -7,6 +7,7 @@ Blog app with Symfony and Docker. Made to learn.
 
 - Using [Slugify](https://github.com/cocur/slugify) to generate post slugs.
 - Using [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle) for images uploading
+- Using [DoctrineFixturesBundle](https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html) and [FakePHP](https://fakerphp.github.io/) for generating false test data.
 
 
 
