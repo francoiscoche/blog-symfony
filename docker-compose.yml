@@ -35,6 +35,7 @@ services:
     volumes:
       - ./docker/vhosts:/etc/apache2/sites-enabled
       - ./:/var/www
+      - /var/www/project/vendor # ignore vendor map. This will prevent Docker from attempting to mount your entire Vendor directory (which is likely huge)
     networks:
       - dev
 
