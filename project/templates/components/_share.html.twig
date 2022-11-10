@@ -1,0 +1,8 @@
+<div class="flex justify-center align-items flex-row">
+    <a class="px-2" href="https://www.facebook.com/sharer/sharer.php?u={{ absolute_url('app_show', {slug: post.slug}) }}">
+        <i class="fab fa-facebook"></i>
+    </a>
+    <a href="https://twitter.com/intent/tweet?text={{ post.title | url_encode }}%20{{ absolute_url('app_show', {slug: post.slug}) }}%20@Symblog">
+        <i class="fab fa-twitter"></i>
+    </a>
+</div>
