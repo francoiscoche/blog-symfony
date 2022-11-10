@@ -24,4 +24,14 @@ class PostController extends AbstractController
             'posts' => $posts,
         ]);
     }
+
+
+    #[Route('/article/{slug}', name: 'app_show', methods: ['GET'])]
+    public function show(Post $post, string $slug = null): Response
+    {
+        // $post = $postRepository->findOneBy(["slug" => $slug]);
+        return $this->render('pages/blog/show.html.twig', [
+            'post' => $post,
+        ]);
+    }
 }
