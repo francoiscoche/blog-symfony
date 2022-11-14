@@ -28,8 +28,8 @@ Blog app with Symfony and Docker. Made to learn.
 *The application is available at http://127.0.0.1:9000*
 
 ### UML
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/102531037/201717308-daa63ba3-04eb-4246-a713-4e07fac463ff.png">
 
-<img width="500" alt="uml" src="https://user-images.githubusercontent.com/102531037/199607904-e6f927d8-6f70-41c3-86ee-260807757ee3.png">
 
 
 ### Author
