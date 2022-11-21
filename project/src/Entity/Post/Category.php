@@ -3,6 +3,8 @@
 namespace App\Entity\Post;
 
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\Post\CategoryRepository;
@@ -30,9 +32,13 @@ class Category
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\ManyToMany(targetEntity: Post::class, inversedBy: 'categories')]
+    private Collection $posts;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->posts = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -98,5 +104,29 @@ class Category
     {
         return $this->title;
     }
+
+        /**
+         * @return Collection<int, Post>
+         */
+        public function getPosts(): Collection
+        {
+            return $this->posts;
+        }
+
+        public function addPost(Post $post): self
+        {
+            if (!$this->posts->contains($post)) {
+                $this->posts->add($post);
+            }
+
+            return $this;
+        }
+
+        public function removePost(Post $post): self
+        {
+            $this->posts->removeElement($post);
+
+            return $this;
+        }
 
 }
