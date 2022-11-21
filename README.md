@@ -12,20 +12,54 @@ Blog app with Symfony and Docker. Made to learn.
 - Integration of [TailWindElement](https://tailwind-elements.com/quick-start/) (Bootstrap components recreated with tailwind css).
 - Integration of [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) to use a pagination system.
 
+<br>
 
 ### Requirements
 
 - Docker
 - Docker-compose
 
-### Installation
+<br><br>
+### Run the project locally with docker
+<br>
 
+Clone the project
 ```bash
-  docker-compose build
-  docker-compose up -d
+git clone git@github.com:francoiscoche/blog-symfony.git
 ```
 
-*The application is available at http://127.0.0.1:9000*
+Run docker-compose
+```bash
+docker-compose build
+docker-compose up -d
+```
+
+Copy the vendor folder to the container (did for performance purpose)
+```bash
+cd .\project\
+composer install
+docker cp vendor www_symblog:/var/www/app
+```
+
+Log into the PHP container
+```bash
+docker exec -it www_symblog bash
+```
+
+Run the fixtures (need to configure database into .env.local)
+```bash
+php bin/console doctrine:fixtures:load
+```
+
+Run npm
+```bash
+npm run build
+```
+
+
+*The application is available at http://127.0.0.1:8000*
+
+<br><br>
 
 ### UML
 <img width="500" alt="image" src="https://user-images.githubusercontent.com/102531037/201717308-daa63ba3-04eb-4246-a713-4e07fac463ff.png">
