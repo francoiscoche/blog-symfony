@@ -2,6 +2,7 @@
 
 namespace App\Repository\Post;
 
+use App\Entity\Post\Category;
 use App\Entity\Post\Post;
 use Doctrine\Migrations\Version\State;
 use Doctrine\Persistence\ManagerRegistry;
@@ -48,16 +49,25 @@ class PostRepository extends ServiceEntityRepository
      * @param int $page
      * @return PaginationInterface
      */
-    public function findpublished(int $page): PaginationInterface
+    public function findpublished(int $page, ?Category $category = null): PaginationInterface
     {
         // 'p' is an alias of post
         $data =  $this->createQueryBuilder('p')
+            ->select('c', 'p')  // On selectionne les catégorie et les posts
+            ->join('p.categories', 'c') // p.categories, qui prend l'alias 'c' avec la jointure
             ->where('p.state LIKE :state')
             ->setParameter('state', '%STATE_PUBLISHED%')
-            ->orderBy('p.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('p.createdAt', 'DESC');
 
+        if(isset($category)) {
+            $data = $data
+                ->andWhere('c.id LIKE :category')
+                ->setParameter('category', $category->getId());
+        }
+
+        $data->getQuery()
+            ->getResult();
+        
         // pagination system with KnpPaginatorBundle
         $posts = $this->paginator->paginate($data, $page, 9);
 
