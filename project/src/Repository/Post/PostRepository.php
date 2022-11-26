@@ -53,7 +53,7 @@ class PostRepository extends ServiceEntityRepository
     {
         // 'p' is an alias of post
         $data =  $this->createQueryBuilder('p')
-            ->select('c', 'p')  // On selectionne les catégorie et les posts
+            // ->select('c', 'p')  // On selectionne les catégorie et les posts
             ->join('p.categories', 'c') // p.categories, qui prend l'alias 'c' avec la jointure
             ->where('p.state LIKE :state')
             ->setParameter('state', '%STATE_PUBLISHED%')
@@ -61,8 +61,11 @@ class PostRepository extends ServiceEntityRepository
 
         if(isset($category)) {
             $data = $data
-                ->andWhere('c.id LIKE :category')
-                ->setParameter('category', $category->getId());
+            // ->andWhere('c.id LIKE :category')
+            // ->setParameter('category', $category->getId());
+            ->andWhere(':category IN (c)')
+            ->setParameter('category', $category);
+
         }
 
         $data->getQuery()
