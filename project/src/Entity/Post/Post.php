@@ -44,6 +44,9 @@ class Post
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Thumbnail $thumbnail = null;
 
+    #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'tags')]
+    private Collection $tags;
+
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'posts')]
     private Collection $categories;
 
@@ -52,6 +55,7 @@ class Post
         $this->updatedAt = new \DateTimeImmutable();
         $this->createdAt = new \DateTimeImmutable();
         $this->categories = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -180,6 +184,33 @@ class Post
     {
         if ($this->categories->removeElement($category)) {
             $category->removePost($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+            $tag->addPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->removeElement($tag)) {
+            $tag->removePost($this);
         }
 
         return $this;

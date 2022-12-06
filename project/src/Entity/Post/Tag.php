@@ -2,22 +2,20 @@
 
 namespace App\Entity\Post;
 
-use App\Entity\Trait\CategoryTagTrait;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\Post\CategoryRepository;
+use App\Entity\Trait\CategoryTagTrait;
+use App\Repository\Post\TagRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\Entity(repositoryClass: TagRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity('slug', message: 'This slug already exist.')]
-class Category
+class Tag
 {
-
     use CategoryTagTrait;
 
-
-    #[ORM\ManyToMany(targetEntity: Post::class, inversedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Post::class, inversedBy: 'tags')]
     private Collection $posts;
 
     /**
@@ -36,7 +34,7 @@ class Category
         
         return $this;
     }
-    
+
     public function removePost(Post $post): self
     {
         $this->posts->removeElement($post);
@@ -46,7 +44,7 @@ class Category
     
     public function __toString()
     {
+        
         return $this->title;
     }
 }
-    
