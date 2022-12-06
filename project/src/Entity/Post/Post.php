@@ -44,7 +44,7 @@ class Post
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Thumbnail $thumbnail = null;
 
-    #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'tags')]
+    #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'posts')]
     private Collection $tags;
 
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'posts')]

@@ -2,8 +2,9 @@
 
 namespace App\Repository\Post;
 
-use App\Entity\Post\Category;
+use App\Entity\Post\Tag;
 use App\Entity\Post\Post;
+use App\Entity\Post\Category;
 use Doctrine\Migrations\Version\State;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -44,12 +45,15 @@ class PostRepository extends ServiceEntityRepository
     //     }
     // }
 
-    /**
-     * Get published posts
-     * @param int $page
-     * @return PaginationInterface
-     */
-    public function findpublished(int $page, ?Category $category = null): PaginationInterface
+        /**
+      * Get published posts
+      *
+      * @param integer $page
+      * @param Category|null $category
+      * @param Tag|null $tag
+      * @return PaginationInterface
+      */
+    public function findpublished(int $page, ?Category $category = null, ?Tag $tag = null): PaginationInterface
     {
         // 'p' is an alias of post
         $data =  $this->createQueryBuilder('p')
@@ -65,6 +69,14 @@ class PostRepository extends ServiceEntityRepository
             // ->setParameter('category', $category->getId());
             ->andWhere(':category IN (c)')
             ->setParameter('category', $category);
+
+        }
+
+        if(isset($tag)) {
+            $data = $data
+            ->join('p.tags', 't') // t.tags, qui prend l'alias 'c' avec la jointure
+            ->andWhere(':tag IN (t)')
+            ->setParameter('tag', $tag);
 
         }
 

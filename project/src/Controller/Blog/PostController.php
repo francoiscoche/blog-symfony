@@ -20,7 +20,7 @@ class PostController extends AbstractController
         // It would be more efficient if we want to call this method in other controllers and maintain this method
         $posts = $postRepository->findpublished($request->query->getInt('page', 1));
 
-        return $this->render('pages/blog/index.html.twig', [
+        return $this->render('pages/post/index.html.twig', [
             'posts' => $posts,
         ]);
     }
@@ -30,7 +30,7 @@ class PostController extends AbstractController
     public function show(Post $post, string $slug = null): Response
     {
         // $post = $postRepository->findOneBy(["slug" => $slug]);
-        return $this->render('pages/blog/show.html.twig', [
+        return $this->render('pages/post/show.html.twig', [
             'post' => $post,
         ]);
     }
