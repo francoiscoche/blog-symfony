@@ -130,8 +130,14 @@ class PostRepository extends ServiceEntityRepository
                     ->orderBy('p.createdAt', 'DESC');
 
                     if(!empty($searchData->q)){
-                        $data = $data->andWhere('p.title LIKE :q')
+                        // Search on post's title and tag's name
+                        $data = $data
+                                    ->join('p.tags', 't')
+                                    ->andWhere('p.title LIKE :q')
+                                    ->orWhere('t.name LIKE :q')
                                     ->setParameter('q', "%{$searchData->q}%");
+
+
                     }
 
                     $data = $data
