@@ -27,26 +27,25 @@ class Category
     {
         return $this->posts;
     }
-    
+
     public function addPost(Post $post): self
     {
         if (!$this->posts->contains($post)) {
             $this->posts->add($post);
         }
-        
+
         return $this;
     }
-    
+
     public function removePost(Post $post): self
     {
         $this->posts->removeElement($post);
-        
+
         return $this;
     }
-    
+
     public function __toString()
     {
-        return $this->title;
+        return $this->name;
     }
 }
-    

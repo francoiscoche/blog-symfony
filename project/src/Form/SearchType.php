@@ -3,10 +3,12 @@
 namespace App\Form;
 
 use App\Model\SearchData;
+use App\Entity\Post\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class SearchType extends AbstractType
 {
@@ -16,7 +18,14 @@ class SearchType extends AbstractType
             ->add('q', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Recherche via mot clé....'
-                ]
+                ],
+                'empty_data' => "",
+                'required' => false
+            ])
+            ->add('categories', EntityType::class, [
+                'class' => Category::class, // Avec EntityType on va faire référence ici a la class Category (entity category)
+                'expanded' => true,
+                'multiple' => true
             ]);
     }
 
@@ -28,5 +37,5 @@ class SearchType extends AbstractType
             'csrf_protection' => false
         ]);
     }
-    
+
 }

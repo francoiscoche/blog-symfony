@@ -83,7 +83,7 @@ class PostRepository extends ServiceEntityRepository
 
         $data->getQuery()
             ->getResult();
-        
+
         // pagination system with KnpPaginatorBundle
         $posts = $this->paginator->paginate($data, $page, 9);
 
@@ -125,7 +125,7 @@ class PostRepository extends ServiceEntityRepository
     public function findBySearch(SearchData $searchData): PaginationInterface {
 
         $data = $this->createQueryBuilder('p')
-                    ->where('p.state LIKE :state')    
+                    ->where('p.state LIKE :state')
                     ->setParameter('state', '%STATE_PUBLISHED%')
                     ->orderBy('p.createdAt', 'DESC');
 
@@ -136,8 +136,13 @@ class PostRepository extends ServiceEntityRepository
                                     ->andWhere('p.title LIKE :q')
                                     ->orWhere('t.name LIKE :q')
                                     ->setParameter('q', "%{$searchData->q}%");
+                    }
 
-
+                    if(!empty($searchData->categories)){
+                        $data = $data
+                                    ->join('p.categories', 'c')
+                                    ->andWhere('c.id IN (:categories)')
+                                    ->setParameter('categories', $searchData->categories);
                     }
 
                     $data = $data
@@ -148,6 +153,6 @@ class PostRepository extends ServiceEntityRepository
         $posts = $this->paginator->paginate($data, $searchData->page, 9);
 
         return $posts;
-                    
+
     }
 }

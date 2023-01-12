@@ -8,5 +8,8 @@ class SearchData {
     public $page = 1;
 
     /** @var string */
-    public string $q = ''; 
+    public string $q = '';
+
+    /** @var array */
+    public array $categories = [];
 }

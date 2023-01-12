@@ -33,7 +33,7 @@ class PostController extends AbstractController
                 'posts' => $posts,
                 'form' => $form->createView()
             ]);
-            
+
         }
 
         // We could use the method findby but we'll use a custom method created in postRepository
